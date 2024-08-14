@@ -1,11 +1,13 @@
-<<<<<<< Updated upstream
 {
   "name": "paymentsdb",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "build": "echo 'No build step required for PaymentsDB'",
+    "start": "node server.js",
+    "predeploy": "cd ../ && npm install",
+    "deploy": "npm run build && npm run start"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +20,3 @@
     "mongoose": "^8.5.3"
   }
 }
-=======
->>>>>>> Stashed changes
