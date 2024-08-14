@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 {
   "name": "paymentsdb",
   "version": "1.0.0",
@@ -20,3 +21,5 @@
     "mongoose": "^8.5.3"
   }
 }
+=======
+>>>>>>> Stashed changes
