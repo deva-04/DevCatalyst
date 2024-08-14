@@ -1,0 +1,12 @@
+# Node modules
+PaymentsDB/node_modules/
+
+# Environment variables
+PaymentsDB/.env
+
+# Logs
+PaymentsDB/*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
