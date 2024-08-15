@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-const mongoURI = 'mongodb+srv://deva:deva2003@cluster0.35bmcvu.mongodb.net/PaymentsDB?retryWrites=true&w=majority&appName=Cluster0';
+const mongoURI = 'mongodb+srv://deva:<password>@cluster0.35bmcvu.mongodb.net/PaymentsDB?retryWrites=true&w=majority&appName=Cluster0';
 
 // Initialize Express app
 const app = express();
