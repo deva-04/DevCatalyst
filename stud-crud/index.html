@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="studentApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+        .table {
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" ng-controller="StudentCtrl as ctrl">
+        <div class="row">
+            <div class="col">
+                <h1>Student Information Dashboard</h1>
+            </div>
+        </div>
+
+        <!-- Display students -->
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Major</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="s in ctrl.students">
+                            <td>{{ s.id }}</td>
+                            <td>{{ s.name }}</td>
+                            <td>{{ s.age }}</td>
+                            <td>{{ s.major }}</td>
+                            <td>
+                                <button class="btn btn-warning" ng-click="ctrl.edit(s)">Edit</button>
+                                <button class="btn btn-danger" ng-click="ctrl.remove(s)">Remove</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Form to add a new student -->
+        <div class="row" ng-if="!ctrl.editMode">
+            <div class="col">
+                <h2>Add New Student</h2>
+                <form ng-submit="ctrl.add()" name="studentForm" novalidate>
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" ng-model="ctrl.new.name" required
+                               ng-pattern="/^[a-zA-Z\s]+$/" placeholder="Enter alphabetic characters only">
+                        <div class="error" ng-show="studentForm.name.$error.pattern && studentForm.name.$touched">
+                            Name should contain alphabetic characters only.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="number" class="form-control" id="age" ng-model="ctrl.new.age" required
+                               min="1" max="120" placeholder="Enter a valid age between 1 and 120">
+                        <div class="error" ng-show="studentForm.age.$error.min || studentForm.age.$error.max">
+                            Age must be between 1 and 120.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="major">Major:</label>
+                        <input type="text" class="form-control" id="major" ng-model="ctrl.new.major" required
+                               ng-pattern="/^[a-zA-Z\s]+$/" placeholder="Enter alphabetic characters only">
+                        <div class="error" ng-show="studentForm.major.$error.pattern && studentForm.major.$touched">
+                            Major should contain alphabetic characters only.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-disabled="studentForm.$invalid">Add Student</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Form to edit an existing student -->
+        <div class="row" ng-if="ctrl.editMode">
+            <div class="col">
+                <h2>Edit Student</h2>
+                <form ng-submit="ctrl.update()" name="editForm" novalidate>
+                    <div class="form-group">
+                        <label for="editName">Name:</label>
+                        <input type="text" class="form-control" id="editName" ng-model="ctrl.editStudent.name" required
+                               ng-pattern="/^[a-zA-Z\s]+$/" placeholder="Enter alphabetic characters only">
+                        <div class="error" ng-show="editForm.editName.$error.pattern && editForm.editName.$touched">
+                            Name should contain alphabetic characters only.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editAge">Age:</label>
+                        <input type="number" class="form-control" id="editAge" ng-model="ctrl.editStudent.age" required
+                               min="1" max="120" placeholder="Enter a valid age between 1 and 120">
+                        <div class="error" ng-show="editForm.editAge.$error.min || editForm.editAge.$error.max">
+                            Age must be between 1 and 120.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editMajor">Major:</label>
+                        <input type="text" class="form-control" id="editMajor" ng-model="ctrl.editStudent.major" required
+                               ng-pattern="/^[a-zA-Z\s]+$/" placeholder="Enter alphabetic characters only">
+                        <div class="error" ng-show="editForm.editMajor.$error.pattern && editForm.editMajor.$touched">
+                            Major should contain alphabetic characters only.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success" ng-disabled="editForm.$invalid">Update Student</button>
+                    <button type="button" class="btn btn-secondary" ng-click="ctrl.cancelEdit()">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
